@@ -16,6 +16,14 @@ class ScrapingController extends Controller
 
     public function scrapeData()
     {
+        // $ret = [
+        //     'link' => 'links',
+        //     'title' => 'titles',
+        //     'author' => 'authors',
+        //     'section' => 'sections',
+        //     'info' => [],
+        // ];
+        // return response()->json(['data' => [$ret]]);
         $client = new Client();
         $crawler = $client->request('GET', 'https://www.kotobati.com/section/%D8%B1%D9%88%D8%A7%D9%8A%D8%A7%D8%AA'); // Replace with the actual URL
 
@@ -81,7 +89,10 @@ class ScrapingController extends Controller
             ];
         });
         
-        $view = view('scraped-data', ['data' => $data])->render();
-        return response()->json(['html' => $view]);
+        // $view = view('scraped-data', ['data' => $data])->render();
+        // return response()->json(['html' => $view]);
+
+        $data = array_filter($data);
+        return response()->json(['data' => $data]);
     }
 }
